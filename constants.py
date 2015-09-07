@@ -13,3 +13,6 @@ LEFTPOINT = "LEFT_POINT"
 
 #pointing, to the right
 RIGHTPOINT = "RIGHT_POINT"
+
+#all pointing down, clear
+CLEAR = "CLEAR"

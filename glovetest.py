@@ -13,3 +13,4 @@ while True:
     #print "x raw", power_glove._x, "y raw", power_glove._y, "z raw", power_glove._z
     #print "Lowest", power_glove.lowest, "Highest", power_glove.highest
     #print "xv", power_glove._xv, "yv", power_glove._yv, "zv", power_glove._zv
+    print "x", power_glove.x, "y", power_glove.y, "z", power_glove.z

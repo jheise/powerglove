@@ -50,6 +50,7 @@ class SerialWrapper(object):
         self.tty = tty
         self.baud = baud
         self.serial_conn = None
+        self.alerted = False
 
     def readline(self):
         output = None
@@ -62,7 +63,13 @@ class SerialWrapper(object):
                     while not os.path.exists(self.tty):
                         time.sleep(.1)
                     self.serial_conn = serial.Serial(self.tty, self.baud)
+                    self.alerted = False
+                    print "Glove connected"
             except serial.SerialException:
+                if not self.alerted:
+                    print "Glove missing, waiting ..."
+                    self.alerted = True
+
                 if self.serial_conn:
                     self.serial_conn.close()
                 del self.serial_conn
@@ -228,3 +235,8 @@ class Glove(object):
                 return LEFTPOINT
             if self.y == 90.0:
                 return RIGHTPOINT
+
+	# relaxed fingers hand pointing down
+	if not any((self.thumb_flex, self.index_flex, self.ring_flex)):
+	    if self.x < -70.0:
+		return CLEAR
